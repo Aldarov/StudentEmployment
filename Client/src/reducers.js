@@ -1,32 +1,25 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
-import { authReducer } from './modules/auth';
-import { sidebarReducer } from './modules/sidebar';
-import { dialogReducer } from './modules/dialogs';
-import { dictionariesReducer } from './modules/layout';
-import { fetchingReducer } from './modules/busyIndicator';
+import { busyIndicatorReducer } from './_global/modules/busyIndicator';
+import { sidebarReducer } from './_global/modules/sidebar';
+import { authReducer } from './_global/modules/auth';
+import { dialogReducer } from './_global/modules/dialogs';
 
-import { employmentListReducer } from './modules/employmentList';
-import { employmentReducer } from './modules/employment';
-import { organizationListReducer } from './modules/organizationList';
-import { organizationReducer } from './modules/organization';
+// import { dictionariesReducer } from './modules/layout';
+
+// import { employmentListReducer } from './modules/employmentList';
+// import { employmentReducer } from './modules/employment';
+// import { organizationListReducer } from './modules/organizationList';
+// import { organizationReducer } from './modules/organization';
+
 
 const reducer = combineReducers({
   isAuth: authReducer,
-  fetching: fetchingReducer,
+  fetching: busyIndicatorReducer,
   sidebar: sidebarReducer,
-  dialog: dialogReducer,
+  dialogs: dialogReducer,
   form: formReducer,
-  employment: combineReducers({
-    list: employmentListReducer,
-    edit: employmentReducer
-  }),
-  organization: combineReducers({
-    list: organizationListReducer,
-    edit: organizationReducer
-  }),
-  dictionaries: dictionariesReducer,
 });
 
 export default reducer;

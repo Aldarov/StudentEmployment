@@ -1,0 +1,11 @@
+export const FETCHING_START = 'FETCHING_START';
+export const FETCHING_END = 'FETCHING_END';
+
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+
+export const OPEN_SIDEBAR = 'OPEN_SIDEBAR';
+export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR';
+
+export const DIALOG_QUESTION_OPEN = 'DIALOG_QUESTION_OPEN';
+export const DIALOG_QUESTION_CLOSE = 'DIALOG_QUESTION_CLOSE';
