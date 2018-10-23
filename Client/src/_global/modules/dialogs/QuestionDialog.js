@@ -1,49 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog';
-import Slide from 'material-ui/transitions/Slide';
-
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function QuestionDialog(props) {
-  const { open, dialogProps, args } = props;
-  const { title, contentText, onYes, onNo } = dialogProps || {};
+  const { open, args, title, contentText, onYes, onNo } = props;
 
   return (
-    <Dialog
-      open={open}
-      transition={Transition}
-      keepMounted
-    >
-      <DialogTitle>{title || ''}</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          {contentText}
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={() => onYes(args)} color="primary" autoFocus >
-          Да
-        </Button>
-        <Button onClick={onNo} color="primary">
-          Нет
-        </Button>
-      </DialogActions>
-    </Dialog>
+    contentText ?
+      <Dialog
+        open={open}
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'
+      >
+        <DialogTitle id='alert-dialog-title'>{ title }</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">{ contentText }</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onYes(args)} color="primary">
+            Да
+          </Button>
+          <Button onClick={onNo} color="primary" autoFocus>
+            Нет
+          </Button>
+        </DialogActions>
+      </Dialog>
+      : null
   );
 }
 
 QuestionDialog.propTypes = {
   open: PropTypes.bool,
-  dialogProps: PropTypes.object,
-  args: PropTypes.object,
+  args: PropTypes.any,
+  title: PropTypes.string,
+  contentText: PropTypes.string,
+  onYes: PropTypes.func,
+  onNo: PropTypes.func,
 };
 

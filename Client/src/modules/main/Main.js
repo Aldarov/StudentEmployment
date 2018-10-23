@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 import { Layout } from '../../_global/modules/layout';
+import DeleteDialog from './dialogs/DeleteDialog';
+import { ModalDialog } from '../../_global/modules/dialogs';
 
-const Main = ({ classes }) => {
+const Main = ({ classes,
+  onDialogOpen,
+  // modalDialogOpened, modalDialogOnClose, modalDialogTitle
+}) => {
   return (
     <Layout
       // headerLeftPart={<IconBtn iconName='Menu' onClick={onHeaderLeftButtonClick}/>}
@@ -21,6 +27,17 @@ const Main = ({ classes }) => {
     >
       <div className={classes.main}>
         Main
+        <Button onClick={onDialogOpen(111)} color="secondary">
+          Open
+        </Button>
+        <DeleteDialog/>
+        {/* <ModalDialog
+          opened={modalDialogOpened}
+          onClose={modalDialogOnClose('data!')}
+          title={modalDialogTitle}
+        >
+          Hello!!!!
+        </ModalDialog> */}
       </div>
     </Layout>
   );
@@ -29,6 +46,10 @@ const Main = ({ classes }) => {
 Main.propTypes = {
   classes: PropTypes.object,
   onHeaderLeftButtonClick: PropTypes.func,
+  onDialogOpen: PropTypes.func,
+  modalDialogOpened: PropTypes.bool,
+  modalDialogOnClose: PropTypes.func,
+  modalDialogTitle: PropTypes.string,
 };
 
 export default withStyles(() => ({

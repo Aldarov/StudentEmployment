@@ -15,7 +15,7 @@ export default function reducer(state = [], action) {
       const st = state && state.filter(item => item.dialogName !== action.data.dialogName);
       return [
         ...st,
-        { dialogName: action.data.dialogName, open: false }
+        { dialogName: action.data.dialogName, open: false, args: null }
       ];
     }
     default:
