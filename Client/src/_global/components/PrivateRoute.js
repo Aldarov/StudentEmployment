@@ -18,9 +18,9 @@ PrivateRoute.propTypes = {
 };
 
 export default compose(
-  onlyUpdateForKeys(['isAuth']),
   connect((state, props) => ({
     isAuth: state.isAuth,
     ...props
-  }))
+  })),
+  onlyUpdateForKeys(['isAuth']),
 )(PrivateRoute);
