@@ -155,7 +155,7 @@ Autocomplete.propTypes = {
 };
 
 export default compose(
-  // onlyUpdateForKeys([]),
+  onlyUpdateForKeys(['inputProps', 'value', 'suggestions']),
   lifecycle({
     getDerivedStateFromProps(nextProps, prevState) {
       if (nextProps.inputProps && nextProps.inputProps.value && prevState.firstReceiveProps) {
