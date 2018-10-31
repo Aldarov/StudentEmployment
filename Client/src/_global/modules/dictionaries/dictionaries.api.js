@@ -1,5 +1,5 @@
 import axios from 'axios';
-import getUrl from '../_global/helpers/getUrl';
+import getUrl from '../../helpers/getUrl';
 
 export function apiGetSpecialities({...args}) {
   const url = getUrl({startUrl: 'api/specialities', ...args});

@@ -99,6 +99,14 @@ const Autocomplete = ({
   handleSuggestionsFetchRequested,
   handleSuggestionSelected
 }) => {
+  console.log('auto:', inputProps);
+  console.log('auto val:', {
+    value: value,
+    onChange: handleChange,
+    onClearSelectSuggestion: handleClearSelectSuggestion,
+    inputDisable: inputDisable,
+    ...inputProps
+  });
   return (
     <div className={className}>
       <Autosuggest

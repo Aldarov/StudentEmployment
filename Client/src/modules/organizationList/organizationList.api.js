@@ -1,5 +1,5 @@
 import axios from 'axios';
-import getUrl from '../_global/helpers/getUrl';
+import getUrl from '../../_global/helpers/getUrl';
 
 const startUrl = 'api/organizations';
 

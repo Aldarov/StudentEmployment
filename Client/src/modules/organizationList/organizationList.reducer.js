@@ -5,7 +5,7 @@ import {
 
   SET_ORGANIZATION_SUGGESTIONS,
   CLEAR_ORGANIZATION_SUGGESTIONS
-} from '../../constants';
+} from '../../_global/constants';
 
 const defaultData = {
   data: [],

@@ -5,40 +5,68 @@ import {
 
   SET_ORGANIZATION_SUGGESTIONS,
   CLEAR_ORGANIZATION_SUGGESTIONS
-} from '../../constants';
+} from '../../_global/constants';
 import {
   apiGetOrganizations, apiDeleteOrganization
 } from './organizationList.api';
-import { fetching } from '../busyIndicator';
+import fetching from '../../_global/helpers/fetching';
 
-export function getOrganizationList(params, formName) {
-  return dispatch => fetching(dispatch, formName,
-    apiGetOrganizations(params).then(res => {
-      dispatch({ type: SET_ORGANIZATION_LIST, data: res });
-      if (params.sorting)
-        dispatch({ type: SET_ORGANIZATION_LIST_SORTING, data: params.sorting });
-      return res;
-    })
-  );
+function getOrganizationList(args) {
+  return fetching('getOrganizationList', async dispatch => {
+    const res = await apiGetOrganizations(args);
+    dispatch({ type: SET_ORGANIZATION_LIST, data: res });
+    if (args.sorting)
+      dispatch({ type: SET_ORGANIZATION_LIST_SORTING, data: args.sorting });
+    return res;
+  });
 }
 
-export function deleteOrganization(id, formName) {
-  return dispatch => fetching(dispatch, formName,
-    apiDeleteOrganization(id).then(() => {
-      dispatch({ type: DELETE_ORGANIZATION, data: id });
-    })
-  );
+export function initOrganizationList() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const { limit, page, sorting } = (state.organization.list && state.organization.list.info) || {};
+    const sort = sorting && sorting.length > 0 ? sorting : [{columnName: 'name', direction: 'asc'}];
+    const args = { limit, page, sorting: sort };
+
+    return dispatch(getOrganizationList(args));
+  };
 }
 
-export function getOrganizationSuggestions(params, formName) {
-  return dispatch => fetching(dispatch, formName,
-    apiGetOrganizations(params).then(res => {
-      dispatch({ type: SET_ORGANIZATION_SUGGESTIONS, data: res.data });
-      return res;
-    })
-  );
+export function getOrganizationListSuggestion(searchId) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const { limit } = (state.organization.list && state.organization.list.info) || {};
+    const args = { limit, id: searchId || null };
+
+    return dispatch(getOrganizationList(args));
+  };
+}
+
+export function clearOrganizationListSuggestion() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const { limit, page, sorting } = (state.organization.list && state.organization.list.info) || {};
+    const args = { limit, page, sorting };
+
+    return dispatch(getOrganizationList(args));
+  };
+}
+
+export function getOrganizationSuggestions(args) {
+  return fetching('getOrganizationSuggestions', async dispatch => {
+    const res = await apiGetOrganizations(args);
+    dispatch({ type: SET_ORGANIZATION_SUGGESTIONS, data: res.data });
+    return res;
+  });
 }
 
 export function clearOrganizationSuggestions() {
   return dispatch => dispatch({ type: CLEAR_ORGANIZATION_SUGGESTIONS });
+}
+
+export function deleteOrganization(id) {
+  return fetching('deleteOrganization', async dispatch => {
+    await apiDeleteOrganization(id);
+    dispatch({ type: DELETE_ORGANIZATION, data: id });
+  });
 }

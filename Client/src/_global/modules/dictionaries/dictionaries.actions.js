@@ -4,8 +4,8 @@ import {
   SET_DISTRIBUTION_TYPES,
   SET_PROFILES,
   CLEAR_PROFILES
-} from '../../_global/constants';
-import fetching from '../../_global/helpers/fetching';
+} from '../../constants';
+import fetching from '../../helpers/fetching';
 
 import {
   apiGetEduForms,

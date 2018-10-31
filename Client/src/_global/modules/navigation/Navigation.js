@@ -5,7 +5,7 @@ import PrivateRoute from '../../components/PrivateRoute';
 import { Login } from '../auth';
 import { NotFound } from '../sysPages';
 
-import { Main } from '../../../modules/main';
+import { OrganizationList } from '../../../modules/organizationList';
 
 class Navigation extends Component {
   render() {
@@ -13,8 +13,8 @@ class Navigation extends Component {
       <BrowserRouter>
         <Switch>
           <Route path='/login' component={Login} />
-          <PrivateRoute exact path='/' component={Main}/>
-          <PrivateRoute path='/main' component={Main}/>
+          <PrivateRoute exact path='/' component={OrganizationList}/>
+          <PrivateRoute path='/organization' component={OrganizationList}/>
           <Route component={NotFound}/>
         </Switch>
       </BrowserRouter>

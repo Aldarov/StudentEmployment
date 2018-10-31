@@ -17,9 +17,10 @@ const reducer = combineReducers({
   isAuth: authReducer,
   fetching: busyIndicatorReducer,
   sidebar: sidebarReducer,
+  dictionaries: dictionariesReducer,
+  organization: organizationListReducer,
   dialogs: dialogReducer,
   form: formReducer,
-  dictionaries: dictionariesReducer,
 });
 
 export default reducer;
