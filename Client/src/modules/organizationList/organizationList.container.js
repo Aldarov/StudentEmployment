@@ -13,8 +13,8 @@ const DELETE_ORGANIZATION_DIALOG = 'DELETE_ORGANIZATION_DIALOG';
 
 const mapStateToProps = (state, props) => {
   return {
-    // data: state.organization.list.data || null,
-    // searchSuggestions: state.organization.list.searchSuggestions,
+    data: state.organization.list.data || null,
+    searchSuggestions: state.organization.list.searchSuggestions,
 
     // deleteOrganizationDialogProps: {
     //   dialogName: DELETE_ORGANIZATION_DIALOG,
@@ -86,7 +86,7 @@ const mapDispatchToProps = (dispatch) => {
     onSuggestionSelected: value => dispatch(getOrganizationListSuggestion(value)),
     onClearSuggestionSelected: () => dispatch(clearOrganizationListSuggestion()),
 
-    onSuggestionsFetchRequested: value => dispatch(getOrganizationSuggestions({ limit: 20, search: value })),
+    onSuggestionsFetchRequested: value => dispatch(getOrganizationSuggestions(value)),
     onSuggestionsClearRequested: () => dispatch(clearOrganizationSuggestions()),
   };
 };
@@ -98,5 +98,5 @@ export default compose(
       this.props.onLoadData();
     }
   }),
-  onlyUpdateForKeys([])
+  // onlyUpdateForKeys([])
 )(OrganizationList);

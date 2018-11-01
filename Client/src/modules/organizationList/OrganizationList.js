@@ -84,7 +84,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Layout } from '../../_global/modules/layout';
 import Title from '../../_global/components/Title';
-// import Autocomplete from '../../_global/components/Autocomplete';
+import Autocomplete from '../../_global/components/Autocomplete';
 // import { QuestionDialog } from '../dialogs';
 
 const OrganizationList = ({
@@ -99,7 +99,7 @@ const OrganizationList = ({
     <Layout
       headerCenterPart={<Title title='Организации'/>}
     >
-      {/* <Autocomplete
+      <Autocomplete
         inputProps={{
           autoFocus: false,
           className: classes.autocomplete,
@@ -111,7 +111,7 @@ const OrganizationList = ({
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         onSuggestionSelected={onSuggestionSelected}
         onClearSelectedSuggestion={onClearSuggestionSelected}
-      /> */}
+      />
     </Layout>
   );
 };

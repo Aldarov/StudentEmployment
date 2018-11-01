@@ -18,7 +18,10 @@ const reducer = combineReducers({
   fetching: busyIndicatorReducer,
   sidebar: sidebarReducer,
   dictionaries: dictionariesReducer,
-  organization: organizationListReducer,
+  organization: combineReducers({
+    list: organizationListReducer,
+    // edit: organizationReducer
+  }),
   dialogs: dialogReducer,
   form: formReducer,
 });

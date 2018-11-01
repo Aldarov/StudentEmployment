@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, onlyUpdateForKeys, lifecycle, withState, withHandlers } from 'recompose';
+import { compose, onlyUpdateForKeys, setStatic, withState, withHandlers } from 'recompose';
 import Autosuggest from 'react-autosuggest';
 import List from '@material-ui/core/List';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -99,14 +99,6 @@ const Autocomplete = ({
   handleSuggestionsFetchRequested,
   handleSuggestionSelected
 }) => {
-  console.log('auto:', inputProps);
-  console.log('auto val:', {
-    value: value,
-    onChange: handleChange,
-    onClearSelectSuggestion: handleClearSelectSuggestion,
-    inputDisable: inputDisable,
-    ...inputProps
-  });
   return (
     <div className={className}>
       <Autosuggest
@@ -163,38 +155,38 @@ Autocomplete.propTypes = {
 };
 
 export default compose(
-  onlyUpdateForKeys(['inputProps', 'value', 'suggestions']),
-  lifecycle({
-    getDerivedStateFromProps(nextProps, prevState) {
-      if (nextProps.inputProps && nextProps.inputProps.value && prevState.firstReceiveProps) {
-        return { firstReceiveProps: false };
-      }
-      return null;
+  setStatic('getDerivedStateFromProps', (nextProps, prevState) => {
+    if (nextProps.inputProps && nextProps.inputProps.value && prevState.firstReceiveProps) {
+      return { firstReceiveProps: false };
     }
+    return null;
   }),
   withState('value', 'setValue', ''),
   withState('inputDisable', 'setInputDisable', false),
   withState('firstReceiveProps', 'setFirstReceiveProps', true),
   withHandlers({
+    debounceSuggestionsFetch: ({...props}) => _.debounce((val) => {
+      props.onSuggestionsFetchRequested(val);
+    }, 500)
+  }),
+  withHandlers({
     handleChange: ({ setValue }) => (event, { newValue }) => setValue(newValue),
-    handleSuggestionSelected: ({ setValue }) => (event, {suggestion}) => {
+    handleSuggestionSelected: ({...props}) => (event, {suggestion}) => {
       if (suggestion && suggestion.id) {
-        this.props.onSuggestionSelected(suggestion);
+        props.onSuggestionSelected(suggestion);
         // setInputDisable(true);
-        setValue(suggestion.name);
+        props.setValue(suggestion.name);
       }
     },
     handleGetSuggestionValue: () => suggestion => suggestion.name,
-    debounceSuggestionsFetch: () => _.debounce((val) => {
-      this.props.onSuggestionsFetchRequested(val);
-    }, 500),
-    handleSuggestionsFetchRequested: () => ({ value }) => this.debounceSuggestionsFetch(value),
-    handleClearSelectSuggestion: ({ setValue, setInputDisable }) => () => {
-      this.props.onClearSelectedSuggestion();
-      setValue('');
-      setInputDisable(false);
+    handleSuggestionsFetchRequested: ({ debounceSuggestionsFetch }) => ({ value }) => debounceSuggestionsFetch(value),
+    handleClearSelectSuggestion: ({...props}) => () => {
+      props.onClearSelectedSuggestion();
+      props.setValue('');
+      props.setInputDisable(false);
     }
   }),
+  // onlyUpdateForKeys(['inputProps', 'value', 'suggestions']),
   withStyles(theme => ({
     container: {
       flexGrow: 1,

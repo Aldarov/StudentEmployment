@@ -23,8 +23,8 @@ function getOrganizationList(args) {
 
 export function initOrganizationList() {
   return (dispatch, getState) => {
-    const state = getState();
-    const { limit, page, sorting } = (state.organization.list && state.organization.list.info) || {};
+    const { limit, page, sorting } = getState().organization.list.info;
+
     const sort = sorting && sorting.length > 0 ? sorting : [{columnName: 'name', direction: 'asc'}];
     const args = { limit, page, sorting: sort };
 
@@ -34,8 +34,7 @@ export function initOrganizationList() {
 
 export function getOrganizationListSuggestion(searchId) {
   return (dispatch, getState) => {
-    const state = getState();
-    const { limit } = (state.organization.list && state.organization.list.info) || {};
+    const { limit } = getState().organization.list;
     const args = { limit, id: searchId || null };
 
     return dispatch(getOrganizationList(args));
@@ -44,16 +43,16 @@ export function getOrganizationListSuggestion(searchId) {
 
 export function clearOrganizationListSuggestion() {
   return (dispatch, getState) => {
-    const state = getState();
-    const { limit, page, sorting } = (state.organization.list && state.organization.list.info) || {};
+    const { limit, page, sorting } = getState().organization.list.info;
     const args = { limit, page, sorting };
 
     return dispatch(getOrganizationList(args));
   };
 }
 
-export function getOrganizationSuggestions(args) {
+export function getOrganizationSuggestions(search) {
   return fetching('getOrganizationSuggestions', async dispatch => {
+    const args = { limit: 20, search };
     const res = await apiGetOrganizations(args);
     dispatch({ type: SET_ORGANIZATION_SUGGESTIONS, data: res.data });
     return res;
