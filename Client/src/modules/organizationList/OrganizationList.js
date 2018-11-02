@@ -84,7 +84,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Layout } from '../../_global/modules/layout';
 import Title from '../../_global/components/Title';
-import Autocomplete from '../../_global/components/Autocomplete';
+// import Autocomplete from '../../_global/components/Autocomplete';
+import Select from '../../_global/components/Select';
 // import { QuestionDialog } from '../dialogs';
 
 const OrganizationList = ({
@@ -94,12 +95,13 @@ const OrganizationList = ({
   searchSuggestions,
   onSuggestionsFetchRequested, onSuggestionsClearRequested,
   onSuggestionSelected, onClearSuggestionSelected,
+  onLoadOptions, selectValue, onSelectInputChange
 }) => {
   return (
     <Layout
       headerCenterPart={<Title title='Организации'/>}
     >
-      <Autocomplete
+      {/* <Autocomplete
         inputProps={{
           autoFocus: false,
           className: classes.autocomplete,
@@ -111,6 +113,12 @@ const OrganizationList = ({
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         onSuggestionSelected={onSuggestionSelected}
         onClearSelectedSuggestion={onClearSuggestionSelected}
+      /> */}
+      <Select
+        placeholder='Введите значения через пробел'
+        onLoadOptions={onLoadOptions}
+        value={selectValue}
+        onInputChange={onSelectInputChange}
       />
     </Layout>
   );
@@ -129,7 +137,10 @@ OrganizationList.propTypes = {
   onSuggestionsFetchRequested: PropTypes.func,
   onSuggestionsClearRequested: PropTypes.func,
   onSuggestionSelected: PropTypes.func,
-  onClearSuggestionSelected: PropTypes.func
+  onClearSuggestionSelected: PropTypes.func,
+  onLoadOptions: PropTypes.func,
+  selectValue: PropTypes.any,
+  onSelectInputChange: PropTypes.func,
 };
 
 export default withStyles(theme => ({

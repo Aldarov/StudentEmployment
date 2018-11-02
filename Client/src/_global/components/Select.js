@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { compose, onlyUpdateForKeys } from 'recompose';
-import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import AsyncSelect from 'react-select/lib/Async';
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -11,7 +12,6 @@ import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
-// import NoSsr from '@material-ui/core/NoSsr';
 
 function NoOptionsMessage(props) {
   return (
@@ -124,7 +124,7 @@ const components = {
   ValueContainer,
 };
 
-const Select  = ({ classes, theme, value, onLoadOptions, placeholder }) => {
+const Select  = ({ classes, theme, value, onInputChange, onLoadOptions, placeholder, props }) => {
   const selectStyles = {
     input: base => ({
       ...base,
@@ -137,14 +137,16 @@ const Select  = ({ classes, theme, value, onLoadOptions, placeholder }) => {
 
   return (
     <AsyncSelect
+      cacheOptions
+      isClearable
       classes={classes}
       styles={selectStyles}
       components={components}
-      value={value}
       placeholder={placeholder}
-      cacheOptions
-      defaultOptions
       loadOptions={onLoadOptions}
+      value={value}
+      onInputChange={onInputChange}
+      {...props}
     />
   );
 };
@@ -152,13 +154,24 @@ const Select  = ({ classes, theme, value, onLoadOptions, placeholder }) => {
 Select.propTypes = {
   classes: PropTypes.object,
   theme: PropTypes.object,
-  value: PropTypes.string,
-  onLoadOptions: PropTypes.func,
   placeholder: PropTypes.string,
+  value: PropTypes.any,
+  onLoadOptions: PropTypes.func,
+  props: PropTypes.object,
+  onInputChange: PropTypes.func,
 };
 
 export default compose(
-  onlyUpdateForKeys(['value', 'suggestions']),
+  connect(
+    (_, props) => ({
+      value: props.value,
+      props: props
+    }),
+    (_, props) => ({
+      onLoadOptions: props.onLoadOptions
+    })
+  ),
+  onlyUpdateForKeys([]),
   withStyles(theme => ({
     input: {
       display: 'flex',

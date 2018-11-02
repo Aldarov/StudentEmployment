@@ -50,18 +50,18 @@ export function clearOrganizationListSuggestion() {
   };
 }
 
-export function getOrganizationSuggestions(search) {
-  return fetching('getOrganizationSuggestions', async dispatch => {
-    const args = { limit: 20, search };
-    const res = await apiGetOrganizations(args);
-    dispatch({ type: SET_ORGANIZATION_SUGGESTIONS, data: res.data });
+export function getOrganizationSuggestions(search, callback) {
+  return fetching('getOrganizationSuggestions', async () => {
+    const res = await apiGetOrganizations({ limit: 20, search });
+    callback(res.data.map(item => ({ value: item.id, label: item.name })));
+    // dispatch({ type: SET_ORGANIZATION_SUGGESTIONS, data: res.data });
     return res;
   });
 }
 
-export function clearOrganizationSuggestions() {
-  return dispatch => dispatch({ type: CLEAR_ORGANIZATION_SUGGESTIONS });
-}
+// export function clearOrganizationSuggestions() {
+//   return dispatch => dispatch({ type: CLEAR_ORGANIZATION_SUGGESTIONS });
+// }
 
 export function deleteOrganization(id) {
   return fetching('deleteOrganization', async dispatch => {

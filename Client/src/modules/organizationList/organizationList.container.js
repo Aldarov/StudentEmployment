@@ -5,7 +5,8 @@ import OrganizationList from './OrganizationList';
 // import { openQuestionDialog, closeQuestionDialog } from '../dialogs';
 import {
   initOrganizationList, getOrganizationListSuggestion, clearOrganizationListSuggestion,
-  getOrganizationSuggestions, clearOrganizationSuggestions, deleteOrganization,
+  getOrganizationSuggestions,
+  deleteOrganization,
 } from './organizationList.actions';
 
 const formName = 'organizationList';
@@ -15,6 +16,7 @@ const mapStateToProps = (state, props) => {
   return {
     data: state.organization.list.data || null,
     searchSuggestions: state.organization.list.searchSuggestions,
+    // selectValue: {}
 
     // deleteOrganizationDialogProps: {
     //   dialogName: DELETE_ORGANIZATION_DIALOG,
@@ -86,17 +88,19 @@ const mapDispatchToProps = (dispatch) => {
     onSuggestionSelected: value => dispatch(getOrganizationListSuggestion(value)),
     onClearSuggestionSelected: () => dispatch(clearOrganizationListSuggestion()),
 
-    onSuggestionsFetchRequested: value => dispatch(getOrganizationSuggestions(value)),
-    onSuggestionsClearRequested: () => dispatch(clearOrganizationSuggestions()),
+    // onSuggestionsFetchRequested: value => dispatch(getOrganizationSuggestions(value)),
+    // onSuggestionsClearRequested: () => dispatch(clearOrganizationSuggestions()),
+    onLoadOptions: (value, callback) => dispatch(getOrganizationSuggestions(value, callback)),
+    onSelectInputChange: value => console.log('onSelectInputChange', value),
   };
 };
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
+  onlyUpdateForKeys([]),
   lifecycle({
     componentDidMount() {
       this.props.onLoadData();
     }
   }),
-  // onlyUpdateForKeys([])
 )(OrganizationList);
