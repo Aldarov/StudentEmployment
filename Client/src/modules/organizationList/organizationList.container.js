@@ -16,7 +16,7 @@ const mapStateToProps = (state, props) => {
   return {
     data: state.organization.list.data || null,
     searchSuggestions: state.organization.list.searchSuggestions,
-    // selectValue: {}
+    // selectValue: { label: 'ГБУЗ "Бурятская республиканская станция переливания крови Министерства здравоохранения РБ"', value: 86}
 
     // deleteOrganizationDialogProps: {
     //   dialogName: DELETE_ORGANIZATION_DIALOG,
@@ -91,7 +91,7 @@ const mapDispatchToProps = (dispatch) => {
     // onSuggestionsFetchRequested: value => dispatch(getOrganizationSuggestions(value)),
     // onSuggestionsClearRequested: () => dispatch(clearOrganizationSuggestions()),
     onLoadOptions: (value, callback) => dispatch(getOrganizationSuggestions(value, callback)),
-    onSelectInputChange: value => console.log('onSelectInputChange', value),
+    onSelectChange: value => console.log('onSelectChange', value),
   };
 };
 

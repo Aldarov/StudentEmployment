@@ -95,7 +95,7 @@ const OrganizationList = ({
   searchSuggestions,
   onSuggestionsFetchRequested, onSuggestionsClearRequested,
   onSuggestionSelected, onClearSuggestionSelected,
-  onLoadOptions, selectValue, onSelectInputChange
+  onLoadOptions, selectValue, onSelectChange
 }) => {
   return (
     <Layout
@@ -115,10 +115,12 @@ const OrganizationList = ({
         onClearSelectedSuggestion={onClearSuggestionSelected}
       /> */}
       <Select
+        label='Организация'
         placeholder='Введите значения через пробел'
         onLoadOptions={onLoadOptions}
         value={selectValue}
-        onInputChange={onSelectInputChange}
+        onChange={onSelectChange}
+        className={classes.autocomplete}
       />
     </Layout>
   );
@@ -138,9 +140,10 @@ OrganizationList.propTypes = {
   onSuggestionsClearRequested: PropTypes.func,
   onSuggestionSelected: PropTypes.func,
   onClearSuggestionSelected: PropTypes.func,
+
   onLoadOptions: PropTypes.func,
-  selectValue: PropTypes.any,
-  onSelectInputChange: PropTypes.func,
+  selectValue: PropTypes.object,
+  onSelectChange: PropTypes.func,
 };
 
 export default withStyles(theme => ({
