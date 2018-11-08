@@ -85,7 +85,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { Layout } from '../../_global/modules/layout';
 import Title from '../../_global/components/Title';
 // import Autocomplete from '../../_global/components/Autocomplete';
-import Select from '../../_global/components/Select';
+import Autocomplete from '../../_global/components/selectNew';
+// import Select from '../../_global/components/Select';
 // import { QuestionDialog } from '../dialogs';
 
 const OrganizationList = ({
@@ -114,7 +115,7 @@ const OrganizationList = ({
         onSuggestionSelected={onSuggestionSelected}
         onClearSelectedSuggestion={onClearSuggestionSelected}
       /> */}
-      <Select
+      <Autocomplete
         label='Организация'
         placeholder='Введите значения через пробел'
         onLoadOptions={onLoadOptions}

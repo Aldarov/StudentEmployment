@@ -5,20 +5,24 @@ import PropTypes from 'prop-types';
 
 const ValueContainer = (props) => {
   return (
-    <div className={props.selectProps.classes.valueContainer}>
+    <div className={props.classes.valueContainer}>
       {props.children}
     </div>
   );
 };
 
 ValueContainer.propTypes = {
-  selectProps: PropTypes.object,
+  classes: PropTypes.object,
   children: PropTypes.any,
 };
 
 export default compose(
-  onlyUpdateForKeys([]),
-  withStyles(theme => ({
-
+  onlyUpdateForKeys(['children']),
+  withStyles(() => ({
+    valueContainer: {
+      display: 'flex',
+      flex: 1,
+      alignItems: 'center',
+    },
   }))
 )(ValueContainer);

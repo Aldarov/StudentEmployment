@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 const SingleValue = (props) => {
   return (
-    <Typography className={props.selectProps.classes.singleValue} {...props.innerProps}>
+    <Typography className={props.classes.singleValue} {...props.innerProps}>
       {props.children}
     </Typography>
   );
@@ -13,7 +13,9 @@ const SingleValue = (props) => {
 
 export default compose(
   onlyUpdateForKeys([]),
-  withStyles(theme => ({
-
+  withStyles(() => ({
+    singleValue: {
+      fontSize: 16,
+    },
   }))
 )(SingleValue);

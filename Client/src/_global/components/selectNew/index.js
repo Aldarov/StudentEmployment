@@ -1,1 +1,2 @@
-export { default as Select } from './Select';
+export { default } from './autocomplete.container';
+export { default as RenderAutocomplete } from './RenderAutocomplete';

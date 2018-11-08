@@ -13,7 +13,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
+import Option from './selectNew/selectComponents/Option';
+import Menu from './selectNew/selectComponents/Menu';
+import Control from './selectNew/selectComponents/Control';
+
 function NoOptionsMessage(props) {
+  console.log('Render NoOptionsMessage', props);
   return (
     <Typography
       color="textSecondary"
@@ -25,45 +30,49 @@ function NoOptionsMessage(props) {
   );
 }
 
-function inputComponent({ inputRef, ...props }) {
-  return <div ref={inputRef} {...props} />;
-}
+// function inputComponent({ inputRef, ...props }) {
+//   console.log('Render inputComponent', inputRef, props);
+//   return <div ref={inputRef} {...props} />;
+// }
 
-function Control(props) {
-  return (
-    <TextField
-      fullWidth
-      InputProps={{
-        inputComponent,
-        inputProps: {
-          className: props.selectProps.classes.input,
-          inputRef: props.innerRef,
-          children: props.children,
-          ...props.innerProps,
-        },
-      }}
-      {...props.selectProps.textFieldProps}
-    />
-  );
-}
+// function Control(props) {
+//   console.log('Render Control', props);
+//   return (
+//     <TextField
+//       fullWidth
+//       InputProps={{
+//         inputComponent,
+//         inputProps: {
+//           className: props.selectProps.classes.input,
+//           inputRef: props.innerRef,
+//           children: props.children,
+//           ...props.innerProps,
+//         },
+//       }}
+//       {...props.selectProps.textFieldProps}
+//     />
+//   );
+// }
 
-function Option(props) {
-  return (
-    <MenuItem
-      buttonRef={props.innerRef}
-      selected={props.isFocused}
-      component="div"
-      style={{
-        fontWeight: props.isSelected ? 500 : 400,
-      }}
-      {...props.innerProps}
-    >
-      {props.children}
-    </MenuItem>
-  );
-}
+// function Option(props) {
+//   console.log('Render Option', props);
+//   return (
+//     <MenuItem
+//       buttonRef={props.innerRef}
+//       selected={props.isFocused}
+//       component="div"
+//       style={{
+//         fontWeight: props.isSelected ? 500 : 400,
+//       }}
+//       {...props.innerProps}
+//     >
+//       {props.children}
+//     </MenuItem>
+//   );
+// }
 
 function Placeholder(props) {
+  console.log('Render Placeholder', props);
   return (
     <Typography
       color="textSecondary"
@@ -76,6 +85,7 @@ function Placeholder(props) {
 }
 
 function SingleValue(props) {
+  console.log('Render SingleValue', props);
   return (
     <Typography className={props.selectProps.classes.singleValue} {...props.innerProps}>
       {props.children}
@@ -84,6 +94,7 @@ function SingleValue(props) {
 }
 
 function ValueContainer(props) {
+  console.log('Render ValueContainer', props);
   return <div className={props.selectProps.classes.valueContainer}>{props.children}</div>;
 }
 ValueContainer.propTypes = {
@@ -92,6 +103,7 @@ ValueContainer.propTypes = {
 };
 
 function MultiValue(props) {
+  console.log('Render MultiValue', props);
   return (
     <Chip
       tabIndex={-1}
@@ -105,13 +117,14 @@ function MultiValue(props) {
   );
 }
 
-function Menu(props) {
-  return (
-    <Paper square className={props.selectProps.classes.paper} {...props.innerProps}>
-      {props.children}
-    </Paper>
-  );
-}
+// function Menu(props) {
+//   console.log('Render Menu', props);
+//   return (
+//     <Paper square className={props.selectProps.classes.paper} {...props.innerProps}>
+//       {props.children}
+//     </Paper>
+//   );
+// }
 
 const components = {
   Control,
@@ -142,12 +155,13 @@ const Select  = ({
       },
     }),
   };
-  const textFieldProps ={
+  const textFieldProps = {
     label,
     InputLabelProps: {
       shrink: true,
     },
   };
+  console.log('Render Select', props);
 
   return (
     <AsyncSelect
