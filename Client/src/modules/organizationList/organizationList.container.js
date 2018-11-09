@@ -4,9 +4,9 @@ import { compose, onlyUpdateForKeys, lifecycle } from 'recompose';
 import OrganizationList from './OrganizationList';
 // import { openQuestionDialog, closeQuestionDialog } from '../dialogs';
 import {
-  initOrganizationList, getOrganizationListSuggestion, clearOrganizationListSuggestion,
-  getOrganizationSuggestions,
+  initOrganizationList,
   deleteOrganization,
+  getOrganizationSuggestions,
 } from './organizationList.actions';
 
 const formName = 'organizationList';
@@ -14,8 +14,7 @@ const DELETE_ORGANIZATION_DIALOG = 'DELETE_ORGANIZATION_DIALOG';
 
 const mapStateToProps = (state, props) => {
   return {
-    data: state.organization.list.data || null,
-    searchSuggestions: state.organization.list.searchSuggestions,
+    data: state.organization.list.data,
     // selectValue: { label: 'ГБУЗ "Бурятская республиканская станция переливания крови Министерства здравоохранения РБ"', value: 86}
 
     // deleteOrganizationDialogProps: {
@@ -85,13 +84,12 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onLoadData: () => dispatch(initOrganizationList()),
-    onSuggestionSelected: value => dispatch(getOrganizationListSuggestion(value)),
-    onClearSuggestionSelected: () => dispatch(clearOrganizationListSuggestion()),
 
-    // onSuggestionsFetchRequested: value => dispatch(getOrganizationSuggestions(value)),
-    // onSuggestionsClearRequested: () => dispatch(clearOrganizationSuggestions()),
     onLoadOptions: (value, callback) => dispatch(getOrganizationSuggestions(value, callback)),
-    onSelectChange: value => console.log('onSelectChange', value),
+    onSelectChange: value => {
+      console.log('onSelectChange', value);
+      // dispatch(getOrganizationListSuggestion(value));
+    },
   };
 };
 

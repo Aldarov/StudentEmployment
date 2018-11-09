@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Autocomplete from '../Autocomplete';
+import Autocomplete from './autocomplete.container';
 
 export default function RenderAutocomplete ({
   input,

@@ -51,12 +51,11 @@ export function clearOrganizationListSuggestion() {
 }
 
 export function getOrganizationSuggestions(search, callback) {
-  return fetching('getOrganizationSuggestions', async () => {
+  return async () => {
     const res = await apiGetOrganizations({ limit: 20, search });
     callback(res.data.map(item => ({ value: item.id, label: item.name })));
-    // dispatch({ type: SET_ORGANIZATION_SUGGESTIONS, data: res.data });
     return res;
-  });
+  };
 }
 
 // export function clearOrganizationSuggestions() {

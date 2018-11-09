@@ -82,46 +82,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+
 import { Layout } from '../../_global/modules/layout';
 import Title from '../../_global/components/Title';
-// import Autocomplete from '../../_global/components/Autocomplete';
-import Autocomplete from '../../_global/components/selectNew';
-// import Select from '../../_global/components/Select';
+import Autocomplete from '../../_global/components/autocomplete';
 // import { QuestionDialog } from '../dialogs';
 
 const OrganizationList = ({
   classes,
-  data,
-  gridSetting,
-  searchSuggestions,
-  onSuggestionsFetchRequested, onSuggestionsClearRequested,
-  onSuggestionSelected, onClearSuggestionSelected,
+  // data,
+  // gridSetting,
   onLoadOptions, selectValue, onSelectChange
 }) => {
   return (
     <Layout
       headerCenterPart={<Title title='Организации'/>}
     >
-      {/* <Autocomplete
-        inputProps={{
-          autoFocus: false,
-          className: classes.autocomplete,
-          label: 'Поиск',
-          placeholder: 'Введите значения через пробел',
-        }}
-        suggestions={searchSuggestions}
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={onSuggestionsClearRequested}
-        onSuggestionSelected={onSuggestionSelected}
-        onClearSelectedSuggestion={onClearSuggestionSelected}
-      /> */}
       <Autocomplete
+        className={classes.autocomplete}
         label='Организация'
         placeholder='Введите значения через пробел'
         onLoadOptions={onLoadOptions}
         value={selectValue}
         onChange={onSelectChange}
-        className={classes.autocomplete}
       />
     </Layout>
   );
@@ -129,18 +112,10 @@ const OrganizationList = ({
 
 OrganizationList.propTypes = {
   classes: PropTypes.object,
-  // headerProps: PropTypes.object,
   deleteOrganizationDialogProps: PropTypes.object,
 
-  onLoadData: PropTypes.func,
   data: PropTypes.array,
   gridSetting: PropTypes.object,
-
-  searchSuggestions: PropTypes.array, //suggestions - должен быть массив объектов типа: { id: <id>, name: <name> }
-  onSuggestionsFetchRequested: PropTypes.func,
-  onSuggestionsClearRequested: PropTypes.func,
-  onSuggestionSelected: PropTypes.func,
-  onClearSuggestionSelected: PropTypes.func,
 
   onLoadOptions: PropTypes.func,
   selectValue: PropTypes.object,

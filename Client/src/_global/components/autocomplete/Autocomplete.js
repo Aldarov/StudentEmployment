@@ -11,7 +11,7 @@ import SingleValue from './сomponents/SingleValue';
 import MultiValue from './сomponents/MultiValue';
 import ValueContainer from './сomponents/ValueContainer';
 import Menu from './сomponents/Menu';
-import LoadingIndicator from './сomponents/LoadingIndicator';
+import LoadingMessage from './сomponents/LoadingMessage';
 
 const components = {
   Control,
@@ -22,7 +22,7 @@ const components = {
   Placeholder,
   SingleValue,
   ValueContainer,
-  LoadingIndicator
+  LoadingMessage
 };
 
 const Autocomplete  = ({
