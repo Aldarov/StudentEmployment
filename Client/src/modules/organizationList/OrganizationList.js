@@ -86,26 +86,42 @@ import { withStyles } from '@material-ui/core/styles';
 import { Layout } from '../../_global/modules/layout';
 import Title from '../../_global/components/Title';
 import Autocomplete from '../../_global/components/autocomplete';
+import { AddButton, EditButton, DeleteButton } from './Buttons';
+import List from '../../_global/components/devexpressList';
+
 // import { QuestionDialog } from '../dialogs';
+
+// const HeaderCenterPart = () => ;
 
 const OrganizationList = ({
   classes,
-  // data,
-  // gridSetting,
-  onLoadOptions, selectValue, onSelectChange
+  data,
+  gridSetting, onChangeCurrentPage, onSortingChange, onSelectionChange, onDoAction,
+  onOrganizationLoadOptions, onOrganizationSelectChange
 }) => {
+  console.log('OrganizationList render', data, gridSetting);
   return (
     <Layout
       headerCenterPart={<Title title='Организации'/>}
     >
-      <Autocomplete
+      {/* <Autocomplete
         className={classes.autocomplete}
         label='Организация'
         placeholder='Введите значения через пробел'
-        onLoadOptions={onLoadOptions}
-        value={selectValue}
-        onChange={onSelectChange}
-      />
+        onLoadOptions={onOrganizationLoadOptions}
+        onChange={onOrganizationSelectChange}
+      /> */}
+      {/* <List
+        data={data}
+        gridSetting={gridSetting}
+        AddButton={AddButton}
+        EditButton={EditButton}
+        DeleteButton={DeleteButton}
+        onChangeCurrentPage={onChangeCurrentPage}
+        onSortingChange={onSortingChange}
+        onSelectionChange={onSelectionChange}
+        onDoAction={onDoAction}
+      /> */}
     </Layout>
   );
 };
@@ -115,11 +131,15 @@ OrganizationList.propTypes = {
   deleteOrganizationDialogProps: PropTypes.object,
 
   data: PropTypes.array,
-  gridSetting: PropTypes.object,
 
-  onLoadOptions: PropTypes.func,
-  selectValue: PropTypes.object,
-  onSelectChange: PropTypes.func,
+  gridSetting: PropTypes.object,
+  onChangeCurrentPage: PropTypes.func,
+  onSortingChange: PropTypes.func,
+  onSelectionChange: PropTypes.func,
+  onDoAction: PropTypes.func,
+
+  onOrganizationLoadOptions: PropTypes.func,
+  onOrganizationSelectChange: PropTypes.func,
 };
 
 export default withStyles(theme => ({

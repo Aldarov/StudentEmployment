@@ -19,7 +19,7 @@ Title.propTypes = {
 };
 
 export default compose(
-  onlyUpdateForKeys(['title']),
+  onlyUpdateForKeys([]),
   withStyles(() => ({
     title: {
       color: 'white',

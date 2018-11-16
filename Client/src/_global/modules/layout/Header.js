@@ -8,6 +8,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 const Header = ({
   classes, leftPart, centerPart, rightPart, visiable = true
 }) => {
+  console.log('Layout Header', centerPart);
   return (
     visiable ?
       <AppBar className={classes.appBar}>

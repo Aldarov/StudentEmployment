@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import PrivateRoute from '../../components/PrivateRoute';
+import PrivateRoute from './PrivateRoute';
 import { Login } from '../auth';
 import { NotFound } from '../sysPages';
 

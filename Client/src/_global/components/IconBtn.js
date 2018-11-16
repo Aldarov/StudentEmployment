@@ -8,7 +8,7 @@ import classNames from 'classnames';
 
 const IconBtn = ({classes, className, onClick, iconName, color }) => {
   const Icon = Icons[iconName];
-
+  console.log('render Icon', {classes, className, onClick, iconName, color });
   return (
     Icon ?
       <IconButton className={classNames(classes.buttonColor, className)} onClick={onClick} color={color}>

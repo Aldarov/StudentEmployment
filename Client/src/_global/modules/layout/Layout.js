@@ -27,6 +27,7 @@ const Layout = ({
   headerVisiable, headerLeftPart, headerCenterPart, headerRightPart,
   onDefaultHeaderLeftButtonClick
 }) => {
+  console.log('Layout render', headerCenterPart);
   return (
     <div className={classes.container}>
       <MuiThemeProvider theme={theme} >

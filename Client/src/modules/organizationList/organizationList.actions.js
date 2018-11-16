@@ -2,9 +2,6 @@ import {
   SET_ORGANIZATION_LIST,
   SET_ORGANIZATION_LIST_SORTING,
   DELETE_ORGANIZATION,
-
-  SET_ORGANIZATION_SUGGESTIONS,
-  CLEAR_ORGANIZATION_SUGGESTIONS
 } from '../../_global/constants';
 import {
   apiGetOrganizations, apiDeleteOrganization
@@ -32,24 +29,6 @@ export function initOrganizationList() {
   };
 }
 
-export function getOrganizationListSuggestion(searchId) {
-  return (dispatch, getState) => {
-    const { limit } = getState().organization.list;
-    const args = { limit, id: searchId || null };
-
-    return dispatch(getOrganizationList(args));
-  };
-}
-
-export function clearOrganizationListSuggestion() {
-  return (dispatch, getState) => {
-    const { limit, page, sorting } = getState().organization.list.info;
-    const args = { limit, page, sorting };
-
-    return dispatch(getOrganizationList(args));
-  };
-}
-
 export function getOrganizationSuggestions(search, callback) {
   return async () => {
     const res = await apiGetOrganizations({ limit: 20, search });
@@ -58,13 +37,43 @@ export function getOrganizationSuggestions(search, callback) {
   };
 }
 
-// export function clearOrganizationSuggestions() {
-//   return dispatch => dispatch({ type: CLEAR_ORGANIZATION_SUGGESTIONS });
+export function sortOrganizationList(sorting) {
+  return (dispatch, getState) => {
+    const { limit, page } = getState().organization.list.info;
+    return dispatch(getOrganizationList({ limit, page, sorting }));
+  };
+}
+
+export function changeOrganizationListPage(newPage) {
+  return (dispatch, getState) => {
+    const { limit, page, sorting } = getState().organization.list.info;
+    if (newPage != page ) {
+      dispatch(getOrganizationList({ limit, page: newPage, sorting }));
+    }
+  };
+}
+
+// export function getOrganizationListSuggestion(searchId) {
+//   return (dispatch, getState) => {
+//     const { limit } = getState().organization.list;
+//     const args = { limit, id: searchId || null };
+
+//     return dispatch(getOrganizationList(args));
+//   };
 // }
 
-export function deleteOrganization(id) {
-  return fetching('deleteOrganization', async dispatch => {
-    await apiDeleteOrganization(id);
-    dispatch({ type: DELETE_ORGANIZATION, data: id });
-  });
-}
+// export function clearOrganizationListSuggestion() {
+//   return (dispatch, getState) => {
+//     const { limit, page, sorting } = getState().organization.list.info;
+//     const args = { limit, page, sorting };
+
+//     return dispatch(getOrganizationList(args));
+//   };
+// }
+
+// export function deleteOrganization(id) {
+//   return fetching('deleteOrganization', async dispatch => {
+//     await apiDeleteOrganization(id);
+//     dispatch({ type: DELETE_ORGANIZATION, data: id });
+//   });
+// }
