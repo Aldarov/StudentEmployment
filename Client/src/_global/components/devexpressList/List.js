@@ -40,8 +40,8 @@ CellDefault.propTypes = {
 };
 
 const List = ({
-  data,
   gridSetting: {
+    data,
     columns,
 
     allowAdding, allowEditing, allowDeleting,
@@ -150,7 +150,6 @@ const List = ({
 };
 
 List.propTypes = {
-  data: PropTypes.array,
   className: PropTypes.string,
   gridSetting: PropTypes.object.isRequired,
   defaultColumnWidths: PropTypes.array,
@@ -172,7 +171,6 @@ List.propTypes = {
 export default compose(
   connect((_, props) => {
     return {
-      data: props.gridSetting.data || [],
       defaultColumnWidths: props.gridSetting.columns.map(item => ({ columnName: item.name, width: item.width }))
     };
   }),

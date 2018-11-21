@@ -7,7 +7,7 @@ import appConfig from '../../../app.config';
 
 const mapStateToProps = () => {
   return {
-    appTitle: appConfig.title
+    appTitle: appConfig.title,
   };
 };
 

@@ -95,24 +95,22 @@ import List from '../../_global/components/devexpressList';
 
 const OrganizationList = ({
   classes,
-  data,
   gridSetting, onChangeCurrentPage, onSortingChange, onSelectionChange, onDoAction,
   onOrganizationLoadOptions, onOrganizationSelectChange
 }) => {
-  console.log('OrganizationList render', data, gridSetting);
+  console.log('OrganizationList render', gridSetting);
   return (
     <Layout
       headerCenterPart={<Title title='Организации'/>}
     >
-      {/* <Autocomplete
+      <Autocomplete
         className={classes.autocomplete}
         label='Организация'
         placeholder='Введите значения через пробел'
         onLoadOptions={onOrganizationLoadOptions}
         onChange={onOrganizationSelectChange}
-      /> */}
-      {/* <List
-        data={data}
+      />
+      <List
         gridSetting={gridSetting}
         AddButton={AddButton}
         EditButton={EditButton}
@@ -121,7 +119,7 @@ const OrganizationList = ({
         onSortingChange={onSortingChange}
         onSelectionChange={onSelectionChange}
         onDoAction={onDoAction}
-      /> */}
+      />
     </Layout>
   );
 };
@@ -129,8 +127,6 @@ const OrganizationList = ({
 OrganizationList.propTypes = {
   classes: PropTypes.object,
   deleteOrganizationDialogProps: PropTypes.object,
-
-  data: PropTypes.array,
 
   gridSetting: PropTypes.object,
   onChangeCurrentPage: PropTypes.func,

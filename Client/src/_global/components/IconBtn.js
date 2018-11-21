@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, onlyUpdateForKeys } from 'recompose';
-import { withStyles } from '@material-ui/core/styles';
+import { onlyUpdateForKeys } from 'recompose';
 import IconButton from '@material-ui/core/IconButton';
 import * as Icons from '@material-ui/icons';
-import classNames from 'classnames';
+import { createSelector } from 'reselect';
 
 const IconBtn = ({classes, className, onClick, iconName, color }) => {
   const Icon = Icons[iconName];
-  console.log('render Icon', {classes, className, onClick, iconName, color });
+  console.log('render IcoButton', Icon);
   return (
     Icon ?
-      <IconButton className={classNames(classes.buttonColor, className)} onClick={onClick} color={color}>
+      <IconButton className={className} onClick={onClick} color={color}>
         <Icon/>
       </IconButton>
       : null
@@ -27,11 +26,4 @@ IconBtn.propTypes = {
   color: PropTypes.string,
 };
 
-export default compose(
-  onlyUpdateForKeys([]),
-  withStyles(() => ({
-    buttonColor: {
-      color: 'white'
-    },
-  }))
-)(IconBtn);
+export default onlyUpdateForKeys(['iconName'])(IconBtn);

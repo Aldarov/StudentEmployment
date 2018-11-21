@@ -18,26 +18,25 @@ const mapStateToProps = (state) => {
   const { limit, page, totalRecord, sorting } = state.organization.list.info;
   console.log('mapStateToProps', );
   return {
-    data: state.organization.list.data,
+    gridSetting: {
+      data: state.organization.list.data,
+      columns: [
+        { name: 'id', title: 'Код', width: 100 },
+        { name: 'name', title: 'Организация', width: 500 },
+        { name: 'address', title: 'Адрес', width: 500 },
+      ],
 
-    // gridSetting: {
-    //   columns: [
-    //     { name: 'id', title: 'Код', width: 100 },
-    //     { name: 'name', title: 'Организация', width: 500 },
-    //     { name: 'address', title: 'Адрес', width: 500 },
-    //   ],
+      allowAdding: true,
+      allowEditing: true,
+      allowDeleting: true,
+      allowSorting: true,
 
-    //   allowAdding: true,
-    //   allowEditing: true,
-    //   allowDeleting: true,
-    //   allowSorting: true,
+      sorting,
 
-    //   sorting,
-
-    //   currentPage: page,
-    //   pageSize: limit,
-    //   totalCount: totalRecord,
-    // },
+      currentPage: page,
+      pageSize: limit,
+      totalCount: totalRecord,
+    },
 
     // deleteOrganizationDialogProps: {
     //   dialogName: DELETE_ORGANIZATION_DIALOG,
@@ -54,7 +53,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch, props) => {
-  console.log('mapDispatchToProps', );
   return {
     onLoadData: () => dispatch(initOrganizationList()),
 
@@ -85,7 +83,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  onlyUpdateForKeys(['data']),
+  onlyUpdateForKeys([]),
   lifecycle({
     componentDidMount() {
       this.props.onLoadData();

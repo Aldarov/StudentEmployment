@@ -3,21 +3,19 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import IconButton from '../../components/IconBtn';
 
 import { Menu } from './menu';
 
 const Sidebar = ({ classes, show, onClose }) => {
+  console.log('Render Sidebar', show);
   return (
     <Drawer
       open={show}
       onClose={onClose}
     >
       <div className={classes.drawerHeader}>
-        <IconButton onClick={onClose}>
-          <ChevronLeftIcon />
-        </IconButton>
+        <IconButton onClick={onClose} iconName='ChevronLeft' />
       </div>
       <Divider/>
       <Menu/>
@@ -38,5 +36,8 @@ export default withStyles(theme => ({
     justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar,
-  }
+  },
+  buttonColor: {
+    color: 'black'
+  },
 }))(Sidebar);

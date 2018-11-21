@@ -1,26 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import indigo from '@material-ui/core/colors/indigo';
-import deepOrange from '@material-ui/core/colors/deepOrange';
 
 import Header from './Header';
 import { BusyIndicator } from '../busyIndicator';
 import { Sidebar } from '../sidebar';
 import IconBtn from '../../components/IconBtn';
 import Title from '../../components/Title';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: indigo,
-    secondary: deepOrange,
-  },
-  typography: {
-    useNextVariants: true,
-  },
-});
 
 const Layout = ({
   classes, children, appTitle,
@@ -30,20 +16,17 @@ const Layout = ({
   console.log('Layout render', headerCenterPart);
   return (
     <div className={classes.container}>
-      <MuiThemeProvider theme={theme} >
-        <CssBaseline/>
-        <BusyIndicator/>
-        <Header
-          visiable={headerVisiable}
-          leftPart={headerLeftPart || <IconBtn iconName='Menu' onClick={onDefaultHeaderLeftButtonClick} />}
-          centerPart={headerCenterPart || <Title title={appTitle} />}
-          rightPart={headerRightPart}
-        />
-        <Sidebar/>
-        <div className={classes.content} >
-          {children}
-        </div>
-      </MuiThemeProvider>
+      <BusyIndicator/>
+      <Header
+        visiable={headerVisiable}
+        leftPart={headerLeftPart || <IconBtn iconName='Menu' onClick={onDefaultHeaderLeftButtonClick} className={classes.leftButton}/>}
+        centerPart={headerCenterPart || <Title title={appTitle} />}
+        rightPart={headerRightPart}
+      />
+      <Sidebar/>
+      <div className={classes.content} >
+        {children}
+      </div>
     </div>
   );
 };
@@ -68,4 +51,7 @@ export default withStyles(theme => ({
   content: {
     padding: theme.spacing.unit,
   },
+  leftButton: {
+    color: 'white'
+  }
 }))(Layout);

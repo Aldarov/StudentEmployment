@@ -2,30 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 
-import Icon from '../../../components/Icon';
+import MenuItem from './MenuItem';
 
 const Menu = ({ classes, onRedirect, routes, location }) => {
-  const { pathname } = location;
 
   return (
     <List className={classes.menu}>
       {
-        routes.map(item => (
-          <ListItem
+        routes.map((item) => (
+          <MenuItem
             key={item.url}
-            button
-            selected={item.url == pathname}
-            onClick={onRedirect(item.url)}
-          >
-            <ListItemIcon>
-              <Icon name={item.iconName}/>
-            </ListItemIcon>
-            <ListItemText inset primary={item.title} />
-          </ListItem>
+            url={item.url}
+            iconName={item.iconName}
+            title={item.title}
+            onRedirect={onRedirect}
+            path={location.pathname}
+          />
         ))
       }
     </List>
