@@ -9,6 +9,7 @@
   "author": "Alex Aldarov",
   "license": "MIT",
   "dependencies": {
+    "@date-io/moment": "^1.1.0",
     "@devexpress/dx-react-core": "^1.0.0",
     "@devexpress/dx-react-grid": "^1.0.0",
     "@devexpress/dx-react-grid-material-ui": "^1.0.0",
@@ -20,8 +21,9 @@
     "classnames": "^2.2.5",
     "intl": "^1.2.5",
     "lodash": "^4.17.5",
+    "material-ui-pickers": "^2.2.4",
     "material-ui-prev": "npm:material-ui@^0.19.4",
-    "moment": "^2.20.1",
+    "moment": "^2.24.0",
     "node-sass": "^4.0.0",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.6.0",

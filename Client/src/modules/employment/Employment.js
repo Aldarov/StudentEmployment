@@ -129,8 +129,9 @@ class Employment extends Component {
               disabled={!contractStuffIsEmpty}
               name='docDate'
               component={RenderDatePicker}
-              floatingLabelText='Дата документа'
-              hintText="Дата документа"
+              label='Дата документа'
+              emptyLabel="Дата документа"
+              className={classes.textField}
             />
 
             {error && <strong className={classes.error}>{error}</strong>}
