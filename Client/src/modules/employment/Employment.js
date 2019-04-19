@@ -131,14 +131,14 @@ class Employment extends Component {
               component={RenderDatePicker}
               label='Дата документа'
               emptyLabel="Дата документа"
-              className={classes.textField}
+              className={classes.date}
             />
 
             {error && <strong className={classes.error}>{error}</strong>}
           </div>
           {
             contractStuffIsEmpty &&
-            <Button className={classes.marginBottom} color="primary" onClick={onLoadStudents}>
+            <Button className={classNames(classes.marginTop, classes.marginBottom)} color="primary" onClick={onLoadStudents}>
               Загрузить студентов по выбранным выше данным
             </Button>
           }

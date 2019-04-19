@@ -5,7 +5,6 @@ import bowser from 'bowser';
 import 'normalize.css';
 import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider';
 import MomentUtils from "@date-io/moment";
-import moment from 'moment';
 import "moment/locale/ru";
 
 import store from './store';
@@ -22,7 +21,7 @@ if (bowser.msie) {
 } else {
   ReactDOM.render(
     <Provider store={store}>
-      <MuiPickersUtilsProvider locale='ru' utils={MomentUtils} moment={moment}>
+      <MuiPickersUtilsProvider utils={MomentUtils}>
         <Navigation/>
       </MuiPickersUtilsProvider>
     </Provider>,
